@@ -1,18 +1,28 @@
 <template>
-  <div class="container">
+  <div id="demo" class="light">
     <h1>All Upcoming Events</h1>
     <br />
-    <div v-for="event in events" class="card" style="width: 25rem;">
-      <h2>{{ event.title }}</h2>
-      <h5>{{ event.description }}</h5>
-      <p>Date: {{ event.date }} Time: {{ event.time }}</p>
-      <img :src="event.image" class="card-img-top" width="500" :alt="event.title" />
-      <div>
-        <a v-bind:href="`/events/${event.id}`" class="btn btn-link">Show event</a>
-        <button v-on:click="createEventUser(event)">Attend Event</button>
-      </div>
-      <br />
-    </div>
+    <!-- Two -->
+    <section id="two" class="wrapper alt style2">
+      <section class="spotlight" v-for="event in events">
+        <div class="image"><img :src="event.image" alt="event.title" /></div>
+        <div class="content">
+          <h2>
+            {{ event.title }}
+            <!-- <br />
+            sed ullamcorper -->
+          </h2>
+          <p>
+            {{ event.description }}
+            <br />
+            {{ event.date }} {{ event.time }}
+          </p>
+          <div>
+            <a v-bind:href="`/events/${event.id}`" class="">Show event</a>
+          </div>
+        </div>
+      </section>
+    </section>
   </div>
 </template>
 
@@ -22,6 +32,9 @@ import axios from "axios";
 export default {
   data: function() {
     return {
+      newEventId: "",
+      newEventRole: "",
+      eventuser: {},
       events: [],
     };
   },
@@ -31,22 +44,6 @@ export default {
       console.log(this.events);
     });
   },
-  methods: {
-    createEventUser: function() {
-      var params = {
-        event_id: this.newEventId,
-        role: this.newEventRole,
-      };
-      axios
-        .post("/api/event_users", params)
-        .then(response => {
-          this.$router.push("/event_users");
-        })
-        .catch(error => {
-          console.log(error.response);
-          this.errors = error.response.data.errors;
-        });
-    },
-  },
+  methods: {},
 };
 </script>

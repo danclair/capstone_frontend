@@ -6,8 +6,16 @@
     <p>Description: {{ event.description }}</p>
     <p>Location: {{ event.location }}</p>
     <p>{{ event.date }} {{ event.time }}</p>
+    <h3>Attendees</h3>
+    <div v-for="user in event.users">
+      <ul>
+        <li>{{ user.first_name }} {{ user.last_name }}</li>
+      </ul>
+    </div>
 
-    <a v-bind:href="`/events/${event.id}/edit`">Edit event</a>
+    <button v-on:click="createEventUser()">Attend Event</button>
+    |
+    <a v-bind:href="`/events/${event.id}/edit`" v-if="event.is_owner">Edit event</a>
     |
     <a href="/events">Back to all events</a>
   </div>
@@ -15,6 +23,7 @@
 
 <script>
 import axios from "axios";
+import moment from "moment";
 
 export default {
   data: function() {
@@ -32,6 +41,26 @@ export default {
         this.event = response.data;
       });
     },
+    createEventUser: function() {
+      var params = {
+        event_id: this.event.id,
+      };
+      axios
+        .post("/api/event_users", params)
+        .then(response => {
+          this.$router.push("/event_users");
+        })
+        .catch(error => {
+          console.log(error.response);
+          this.errors = error.response.data.errors;
+        });
+    },
+    // relativeDate: function() {
+    //   return moment(event.date).format("MMMM Do, YYYY");
+    // },
+    // relativeTime: function() {
+    //   return moment(event.time).format("h:mm a");
+    // },
   },
 };
 </script>
