@@ -6,6 +6,14 @@
       <router-link to="/about">About</router-link>
       |
       <router-link to="/events">Events</router-link>
+      |
+      <router-link to="/events/new" v-if="jwt">New Event</router-link>
+      |
+      <router-link to="/signup" v-if="!jwt">Signup</router-link>
+      |
+      <router-link to="/login" v-if="!jwt">Login</router-link>
+      |
+      <router-link to="/logout" v-if="jwt">Logout</router-link>
     </div>
     <router-view />
   </div>
@@ -33,3 +41,21 @@
   color: #42b983;
 }
 </style>
+
+<script>
+export default {
+  data: function() {
+    return {
+      jwt: null,
+    };
+  },
+  created: function() {
+    this.setJwt();
+  },
+  methods: {
+    setJwt: function() {
+      this.jwt = localStorage.jwt;
+    },
+  },
+};
+</script>

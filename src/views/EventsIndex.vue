@@ -1,62 +1,51 @@
 <template>
-  <div class="events-index">
+  <div class="container">
     <h1>All Upcoming Events</h1>
-    Search:
-    <input type="text" v-model="filterText" list="titles" />
-    <datalist id="events">
-      <option v-for="event in events">{{ event.title }}</option>
-    </datalist>
-    <div
-      v-for="event in filterBy(events, filterText, 'title', 'description')"
-      class="card"
-      style="width: 18rem;"
-      v-bind:class="{ selected: event === currentEvent }"
-    >
+    <br />
+    <div v-for="event in events" class="card" style="width: 25rem;">
       <h2>{{ event.title }}</h2>
-      <p>{{ event.description }}</p>
-      <img v-bind:src="event.image" class="card-img-top" v-bind:alt="event.title" />
-      <small>Created at {{ relativeDate(event.created_at) }}</small>
+      <h5>{{ event.description }}</h5>
+      <p>Date: {{ event.date }} Time: {{ event.time }}</p>
+      <img :src="event.image" class="card-img-top" width="500" :alt="event.title" />
       <div>
         <a v-bind:href="`/events/${event.id}`" class="btn btn-link">Show event</a>
+        <button v-on:click="createEventUser(event)">Attend Event</button>
       </div>
-      <small></small>
+      <br />
     </div>
-    <!-- <div v-for="event in events">
-      <h2>{{ event.title }}</h2>
-    </div> -->
   </div>
 </template>
 
-<style>
-.selected {
-  color: white;
-  background-color: steelBlue;
-  transition: background-color 1s ease;
-}
-</style>
-
 <script>
 import axios from "axios";
-import moment from "moment";
-import Vue2Filters from "vue2-filters";
 
 export default {
-  mixins: [Vue2Filters.mixin],
   data: function() {
     return {
-      message: "Welcome to Vue.js!",
       events: [],
-      filterText: "",
     };
   },
   created: function() {
     axios.get("/api/events").then(response => {
       this.events = response.data;
+      console.log(this.events);
     });
   },
   methods: {
-    relativeDate: function(date) {
-      return moment(date).fromNow();
+    createEventUser: function() {
+      var params = {
+        event_id: this.newEventId,
+        role: this.newEventRole,
+      };
+      axios
+        .post("/api/event_users", params)
+        .then(response => {
+          this.$router.push("/event_users");
+        })
+        .catch(error => {
+          console.log(error.response);
+          this.errors = error.response.data.errors;
+        });
     },
   },
 };
