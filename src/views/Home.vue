@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper alt style2">
+  <div class="wrapper alt style3">
     <!-- Banner -->
     <section id="banner" class>
       <img src="/public/images/banner1.jpg" alt="" />
@@ -9,17 +9,23 @@
           Accelerating the love of electric transport
         </p>
       </div>
-    </section>
-    <section id="two" class="wrapper alt style2">
-      <ul id="h-list" class="actions">
-        <li><a href="/login" class="button primary large">Login</a></li>
-        <li><a href="/signup" class="button primary large">Signup</a></li>
-      </ul>
+      <br />
+      <br />
+      <section id="two" class="wrapper alt style3">
+        <ul id="h-list" class="actions">
+          <li><a href="/login" class="button primary large">Login</a></li>
+          <li><a href="/signup" class="button primary large">Signup</a></li>
+        </ul>
+      </section>
     </section>
   </div>
 </template>
 
-<style></style>
+<style>
+#two {
+  margin: 0 auto;
+}
+</style>
 
 <script>
 export default {
