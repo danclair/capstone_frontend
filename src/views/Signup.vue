@@ -28,6 +28,10 @@
         </div>
         <input type="submit" class="btn btn-primary" value="Submit" />
       </form>
+      <p>
+        Already have an account?
+        <a href="/login">Login here</a>
+      </p>
     </div>
   </div>
 </template>

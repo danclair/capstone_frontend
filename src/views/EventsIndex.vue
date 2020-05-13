@@ -1,16 +1,16 @@
 <template>
   <div id="demo" class="light">
-    <h1>All Upcoming Events</h1>
     <br />
+    <br />
+    <br />
+    <h1>All Upcoming Events</h1>
     <!-- Two -->
-    <section id="two" class="wrapper alt style2">
+    <section id="two" class="wrapper alt style1">
       <section class="spotlight" v-for="event in events">
         <div class="image"><img :src="event.image" alt="event.title" /></div>
         <div class="content">
           <h2>
             {{ event.title }}
-            <!-- <br />
-            sed ullamcorper -->
           </h2>
           <p>
             {{ event.description }}

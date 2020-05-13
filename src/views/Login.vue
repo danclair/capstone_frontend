@@ -16,6 +16,10 @@
         </div>
         <input type="submit" class="btn btn-primary" value="Submit" />
       </form>
+      <p>
+        No account?
+        <a href="/signup">Sign up here</a>
+      </p>
     </div>
   </div>
 </template>
@@ -43,7 +47,7 @@ export default {
           axios.defaults.headers.common["Authorization"] = "Bearer " + response.data.jwt;
           localStorage.setItem("jwt", response.data.jwt);
           this.$parent.setJwt();
-          this.$router.push("/");
+          this.$router.push("/events");
         })
         .catch(error => {
           this.errors = ["Invalid email or password."];
