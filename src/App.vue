@@ -22,8 +22,6 @@
       </nav>
     </header>
 
-    <!-- <div id="demo-iframe-wrapper"><iframe id="demo-iframe" src="/public/images/banner1.jpg" width="100%">-</iframe></div> -->
-
     <router-view />
 
     <!-- Footer -->
@@ -58,29 +56,14 @@
 
 <style>
 body {
-  background-color: black !important;
-
+  /* background-color: black !important; */
 }
-/* #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+.actions {
+  margin: auto;
 }
-
-#nav {
-  padding: 30px;
+ul#h-list {
+  margin: auto;
 }
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-} */
 </style>
 
 <script>

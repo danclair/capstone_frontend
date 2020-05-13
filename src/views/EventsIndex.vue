@@ -1,9 +1,11 @@
 <template>
-  <div id="demo" class="light">
+  <div class="wrapper alt style3">
     <br />
     <br />
     <br />
-    <h1>All Upcoming Events</h1>
+    <div>
+      <h1>All Upcoming Events</h1>
+    </div>
     <!-- Two -->
     <section id="two" class="wrapper alt style1">
       <section class="spotlight" v-for="event in events">
@@ -25,6 +27,12 @@
     </section>
   </div>
 </template>
+
+<style>
+.events-header {
+  background-color: black !important;
+}
+</style>
 
 <script>
 import axios from "axios";

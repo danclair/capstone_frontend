@@ -1,19 +1,21 @@
 <template>
-  <div class="home">
+  <div class="wrapper alt style2">
     <!-- Banner -->
-    <!-- <section id="banner"> -->
-    <!-- <div class="inner">
-      <h2>ElectrifyMe</h2>
-      <p>
-        Accelerating the love of electric transport
-      </p>
-    </div> -->
-    <!-- </section> -->
-    <h1>{{ message }}</h1>
-    <ul class="actions">
-      <li><a href="/login" class="button large">Login</a></li>
-      <li><a href="/signup" class="button large">Signup</a></li>
-    </ul>
+    <section id="banner" class>
+      <img src="/public/images/banner1.jpg" alt="" />
+      <div class="inner">
+        <h2>ElectrifyMe</h2>
+        <p>
+          Accelerating the love of electric transport
+        </p>
+      </div>
+    </section>
+    <section id="two" class="wrapper alt style2">
+      <ul id="h-list" class="actions">
+        <li><a href="/login" class="button primary large">Login</a></li>
+        <li><a href="/signup" class="button primary large">Signup</a></li>
+      </ul>
+    </section>
   </div>
 </template>
 
