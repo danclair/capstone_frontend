@@ -1,5 +1,5 @@
 <template>
-  <div class="signup">
+  <div class="wrapper style1">
     <div class="container">
       <form v-on:submit.prevent="submit()">
         <h1>Signup</h1>
@@ -7,26 +7,21 @@
           <li class="text-danger" v-for="error in errors">{{ error }}</li>
         </ul>
         <div class="form-group">
-          <label>First Name:</label>
-          <input type="text" class="form-control" v-model="first_name" />
+          <input type="text" class="form-control" v-model="first_name" placeholder="First Name" autofocus />
         </div>
         <div class="form-group">
-          <label>Last Name:</label>
-          <input type="text" class="form-control" v-model="last_name" />
+          <input type="text" class="form-control" v-model="last_name" placeholder="Last Name" />
         </div>
         <div class="form-group">
-          <label>Email:</label>
-          <input type="email" class="form-control" v-model="email" />
+          <input type="email" class="form-control" v-model="email" placeholder="Email" />
         </div>
         <div class="form-group">
-          <label>Password:</label>
-          <input type="password" class="form-control" v-model="password" />
+          <input type="password" class="form-control" v-model="password" placeholder="Password" />
         </div>
         <div class="form-group">
-          <label>Password confirmation:</label>
-          <input type="password" class="form-control" v-model="passwordConfirmation" />
+          <input type="password" class="form-control" v-model="passwordConfirmation" placeholder="Confirm Password" />
         </div>
-        <input type="submit" class="btn btn-primary" value="Submit" />
+        <input type="submit" class="primary" value="Submit" />
       </form>
       <p>
         Already have an account?

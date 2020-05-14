@@ -1,8 +1,7 @@
 <template>
   <div class="wrapper alt style3">
     <!-- Banner -->
-    <section id="banner" class>
-      <img src="/public/images/banner1.jpg" alt="" />
+    <section id="banner" class="home-banner">
       <div class="inner">
         <h2>ElectrifyMe</h2>
         <p>
@@ -17,11 +16,15 @@
           <li><a href="/signup" class="button primary large">Signup</a></li>
         </ul>
       </section>
+      <span class="image fit"><img src="images/banner2.jpg" alt="" width="fit" /></span>
     </section>
   </div>
 </template>
 
 <style>
+.home-banner {
+  background-image: public/images/pic02.jpg;
+}
 #two {
   margin: 0 auto;
 }

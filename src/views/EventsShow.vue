@@ -2,7 +2,9 @@
   <section class="wrapper style1">
     <div class="inner">
       <!-- <div id="one" class="wrapper style1"> -->
-      <h1>Event Info</h1>
+      <div>
+        <h1>Event Info</h1>
+      </div>
       <h2>{{ event.title }}</h2>
       <img :src="event.image" width="500" alt="event.title" />
       <p>
@@ -19,27 +21,36 @@
       </p>
       <div id="map"></div>
       <br />
+
       <h4>Comments</h4>
-      <div v-for="comment in event.comments">
-        <p>
-          <b>{{ comment.first_name }} {{ comment.last_name }}:</b>
-          {{ comment.text }}
-        </p>
-        <p></p>
+      <div class="col-6 col-12-medium alt special" v-for="comment in event.comments">
+        <ul class="alt">
+          <li>
+            {{ comment.first_name }} {{ comment.last_name }}:
+            {{ comment.text }}
+          </li>
+        </ul>
       </div>
+
       <h4>Attendees:</h4>
       <div v-for="user in event.users">
         <ul>
           <li>{{ user.first_name }} {{ user.last_name }}</li>
         </ul>
       </div>
+      <section>
+        <button class="button icon solid fa-thumbs-up" v-on:click="createEventUser()">Attend Event</button>
+        <button class="button icon solid fa-thumbs-down" v-on:click="destroyEventUser(eventuser)">
+          Don't Attend Event
+        </button>
+      </section>
+      <section>
+        <a v-bind:href="`/events/${event.id}/edit`" v-if="event.is_owner" class="button icon solid fa-edit">
+          Edit event
+        </a>
 
-      <button v-on:click="createEventUser()">Attend Event</button>
-      <button v-on:click="destroyEventUser(eventuser)">Don't Attend Event</button>
-      |
-      <a v-bind:href="`/events/${event.id}/edit`" v-if="event.is_owner">Edit event</a>
-      |
-      <a href="/events">Back to all events</a>
+        <a href="/events" class="button icon solid fa-arrow-left">Back to all events</a>
+      </section>
     </div>
   </section>
 </template>
@@ -97,7 +108,7 @@ export default {
               container: "map",
               style: "mapbox://styles/mapbox/streets-v11",
               center: feature.center,
-              zoom: 10,
+              zoom: 12,
             });
             new mapboxgl.Marker().setLngLat(feature.center).addTo(map);
           }

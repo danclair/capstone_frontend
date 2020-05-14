@@ -20,7 +20,7 @@
             {{ event.date }} {{ event.time }}
           </p>
           <div>
-            <a v-bind:href="`/events/${event.id}`" class="">Show event</a>
+            <a :href="`/events/${event.id}`" class="button small">Show event</a>
           </div>
         </div>
       </section>

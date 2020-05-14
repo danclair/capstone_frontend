@@ -1,13 +1,13 @@
 <template>
   <div id="app">
     <!-- Header -->
-    <header id="header">
+    <header id="header" class="inner">
       <h2>ElectrifyMe</h2>
       <nav id="nav">
         <ul>
           <li class="special">
             <a href="#menu" class="menuToggle"><span>Menu</span></a>
-            <div id="menu">
+            <div id="menu" class="wrapper style4">
               <ul>
                 <li><a href="/">Home</a></li>
                 <li><a href="/events">Events</a></li>
@@ -55,11 +55,16 @@
 </template>
 
 <style>
-body {
-  /* background-color: black !important; */
+#menu {
+  /* background-color: #2e3842; */
+  backdrop-filter: drop-shadow(100px);
+
 }
 .actions {
   margin: auto;
+}
+.welcome {
+  text-align: center;
 }
 ul#h-list {
   margin: auto;
