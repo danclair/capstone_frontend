@@ -9,7 +9,7 @@
             <a href="#menu" class="menuToggle"><span>Menu</span></a>
             <div id="menu" class="wrapper style4">
               <ul>
-                <li><a href="/">Home</a></li>
+                <li><a href="/home">Home</a></li>
                 <li><a href="/events">Events</a></li>
                 <li v-if="jwt"><a href="/events/new">New Event</a></li>
                 <li v-if="!jwt"><a href="/signup">Sign Up</a></li>

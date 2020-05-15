@@ -34,7 +34,7 @@
         <br />
         <input type="text" v-model="newEventLocation" placeholder="Location" />
         <br />
-        <input type="text" v-model="newEventImage" placeholder="Image" />
+        <input type="file" v-on:change="setFile($event)" ref="fileInput" />
         <br />
         <ul class="actions">
           <li><input type="submit" value="Create Event" class="primary" /></li>
@@ -59,23 +59,37 @@ export default {
       newEventDate: "",
       newEventTime: "",
       newEventLocation: "",
-      newEventImage: "",
+      // newEventImage: "",
+      image: "",
       errors: [],
     };
   },
   created: function() {},
   methods: {
+    setFile: function(event) {
+      if (event.target.files.length > 0) {
+        this.image = event.target.files[0];
+      }
+    },
     createEvent: function() {
-      var params = {
-        title: this.newEventTitle,
-        description: this.newEventDescription,
-        date: this.newEventDate,
-        time: this.newEventTime,
-        location: this.newEventLocation,
-        image: this.newEventImage,
-      };
+      var formData = new FormData();
+      formData.append("title", this.newEventTitle);
+      formData.append("description", this.newEventDescription);
+      formData.append("date", this.newEventDate);
+      formData.append("time", this.newEventTime);
+      formData.append("location", this.newEventLocation);
+      formData.append("image", this.image);
+
+      // var params = {
+      //   title: this.newEventTitle,
+      //   description: this.newEventDescription,
+      //   date: this.newEventDate,
+      //   time: this.newEventTime,
+      //   location: this.newEventLocation,
+      //   image: this.newEventImage,
+      // };
       axios
-        .post("/api/events", params)
+        .post("/api/events", formData)
         .then(response => {
           this.$router.push("/events");
         })

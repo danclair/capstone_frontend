@@ -26,12 +26,28 @@
       <div class="col-6 col-12-medium alt special" v-for="comment in event.comments">
         <ul class="alt">
           <li>
-            {{ comment.first_name }} {{ comment.last_name }}:
+            <b>{{ comment.first_name }} {{ comment.last_name }}:</b>
             {{ comment.text }}
           </li>
         </ul>
       </div>
-
+      <div class="col-6 col-12-medium alt special">
+        <textarea
+          v-model="newCommentText"
+          name="demo-message"
+          id="demo-message"
+          placeholder="Add a comment"
+          rows="2"
+        ></textarea>
+        <div>
+          <ul class="actions">
+            <li>
+              <input type="submit" v-on:click="createComment()" value="Submit Comment" class="button primary small" />
+            </li>
+          </ul>
+        </div>
+      </div>
+      <br />
       <h4>Attendees:</h4>
       <div v-for="user in event.users">
         <ul>
@@ -78,6 +94,7 @@ export default {
       event: {},
       eventuser: {},
       comments: [],
+      newCommentText: "",
     };
   },
   created: function() {},
@@ -148,6 +165,22 @@ export default {
         // this.$router.push("/events/" + this.$route.params.id);
         location.reload();
       });
+    },
+    createComment: function() {
+      var params = {
+        event_id: this.event.id,
+        text: this.newCommentText,
+      };
+
+      axios
+        .post("/api/comments", params)
+        .then(response => {
+          location.reload();
+        })
+        .catch(error => {
+          console.log(error.response);
+          this.errors = error.response.data.errors;
+        });
     },
   },
 };
