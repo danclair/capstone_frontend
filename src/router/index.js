@@ -9,6 +9,7 @@ import EventsIndex from "../views/EventsIndex.vue";
 import EventsNew from "../views/EventsNew.vue";
 import EventsShow from "../views/EventsShow.vue";
 import EventsEdit from "../views/EventsEdit.vue";
+import EventsNearMe from "../views/EventsNearMe.vue";
 
 Vue.use(VueRouter);
 
@@ -38,6 +39,7 @@ const routes = [
   { path: "/events/new", name: "events-new", component: EventsNew },
   { path: "/events/:id", name: "events-show", component: EventsShow },
   { path: "/events/:id/edit", name: "events-edit", component: EventsEdit },
+  { path: "/eventsnearme", name: "events-near-me", component: EventsNearMe },
 ];
 
 const router = new VueRouter({

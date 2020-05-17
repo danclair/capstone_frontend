@@ -9,9 +9,10 @@
             <a href="#menu" class="menuToggle"><span>Menu</span></a>
             <div id="menu" class="wrapper style4">
               <ul>
-                <li><a href="/home">Home</a></li>
+                <li><a href="/home">Home Base</a></li>
                 <li><a href="/events">Events</a></li>
                 <li v-if="jwt"><a href="/events/new">New Event</a></li>
+                <li v-if="jwt"><a href="/eventsnearme">Events Near Me</a></li>
                 <li v-if="!jwt"><a href="/signup">Sign Up</a></li>
                 <li v-if="!jwt"><a href="/login">Log In</a></li>
                 <li v-if="jwt"><a href="/logout">Logout</a></li>
@@ -28,23 +29,20 @@
     <footer id="footer">
       <ul class="icons">
         <li>
-          <a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a>
+          <a href="#" class="icon solid fa-home"><span class="label">Twitter</span></a>
         </li>
         <li>
-          <a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a>
+          <a href="#" class="icon solid fa-car"><span class="label">Facebook</span></a>
         </li>
         <li>
-          <a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a>
+          <a href="#" class="icon solid fa-calendar-check"><span class="label">Instagram</span></a>
         </li>
         <li>
-          <a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a>
-        </li>
-        <li>
-          <a href="#" class="icon solid fa-envelope"><span class="label">Email</span></a>
+          <a href="#" class="icon solid fa-edit"><span class="label">Dribbble</span></a>
         </li>
       </ul>
       <ul class="copyright">
-        <li>&copy; Untitled</li>
+        <li>&copy; ElectrifyMe</li>
         <li>
           Design:
           <a href="http://html5up.net">HTML5 UP</a>

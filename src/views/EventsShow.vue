@@ -1,12 +1,11 @@
 <template>
   <section class="wrapper style1">
     <div class="inner">
-      <!-- <div id="one" class="wrapper style1"> -->
       <div>
         <h1>Event Info</h1>
       </div>
       <h2>{{ event.title }}</h2>
-      <img :src="event.image" width="500" alt="event.title" />
+      <img :src="event.image" class="responsive" alt="event.title" />
       <p>
         <b>What:</b>
         {{ event.description }}
@@ -28,6 +27,8 @@
           <li>
             <b>{{ comment.first_name }} {{ comment.last_name }}:</b>
             {{ comment.text }}
+            <br />
+            <small>(at {{ comment.posted }})</small>
           </li>
         </ul>
       </div>
@@ -72,6 +73,10 @@
 </template>
 
 <style>
+.responsive {
+  width: 100%;
+  height: auto;
+}
 body {
   margin: 0;
   padding: 0;
