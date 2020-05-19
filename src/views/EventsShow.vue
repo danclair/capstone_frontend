@@ -49,12 +49,27 @@
         </div>
       </div>
       <br />
+      <!-- <h4>Cars at this event:</h4>
+      <div v-for="vehicle in vehicles">
+        <ul>
+          <li>{{ vehicle.make }}</li>
+        </ul>
+      </div> -->
       <h4>Attendees:</h4>
       <div v-for="user in event.users">
         <ul>
           <li>{{ user.first_name }} {{ user.last_name }}</li>
         </ul>
+        <!-- <div v-for="vehicle in user.vehicles">
+          <ul>
+            <li>{{ vehicle.make }}</li>
+          </ul> -->
+        <!-- <div v-for="vehicle in user.vehicles">
+          <h6>Car:</h6>
+          <h5>{{ user.vehicle.make }}</h5> -->
+        <!-- </div> -->
       </div>
+
       <section>
         <button class="button icon solid fa-thumbs-up" v-on:click="createEventUser()">Attend Event</button>
         <button class="button icon solid fa-thumbs-down" v-on:click="destroyEventUser(eventuser)">
@@ -85,7 +100,7 @@ body {
   top: 0;
   bottom: 0;
   height: 300px;
-  width: 500px;
+  width: auto;
 }
 </style>
 
@@ -100,12 +115,14 @@ export default {
       eventuser: {},
       comments: [],
       newCommentText: "",
+      vehicles: [],
     };
   },
   created: function() {},
   mounted: function() {
     this.showEvent();
     this.showComments();
+    this.getVehicles();
   },
 
   methods: {
@@ -147,6 +164,12 @@ export default {
       axios.get("/api/comments").then(response => {
         console.log("Get one comment: ", response);
         this.comments = response.data;
+      });
+    },
+    getVehicles: function() {
+      axios.get("/api/vehicles").then(response => {
+        console.log("Get vehicles: ", response);
+        this.vehicles = response.data;
       });
     },
     createEventUser: function() {

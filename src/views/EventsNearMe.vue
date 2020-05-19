@@ -5,7 +5,6 @@
         <h1>Events Near Me</h1>
       </div>
 
-      <h1>MAP HERE HERE HERE</h1>
       <br />
       <div id="map"></div>
     </div>
@@ -24,23 +23,14 @@ body {
 #map {
   top: 0;
   bottom: 0;
-  height: 300px;
-  width: 500px;
+  height: 500px;
+  width: auto;
 }
 </style>
 
 <script>
 import axios from "axios";
 import moment from "moment";
-
-// var mapboxgl = require("mapbox-gl/dist/mapbox-gl.js");
-// mapboxgl.accessToken = "pk.eyJ1IjoiZGFuY2xhaXIiLCJhIjoiY2thMzg5c3B3MGxycjNtcXdmYnI4OTU2YyJ9.RGBfD1rU5v1MFBYgcSEaiw";
-// var map = new mapboxgl.Map({
-//   container: "map", // container id
-//   style: "mapbox://styles/mapbox/streets-v11", // stylesheet location
-//   center: [-74.5, 40], // starting position [lng, lat]
-//   zoom: 9, // starting zoom
-// });
 
 export default {
   data: function() {
@@ -53,7 +43,7 @@ export default {
   },
   created: function() {},
   mounted: function() {
-    this.showEvents();
+    this.getEvents();
     // this.showComments();
     // this.setupMap();
   },
@@ -66,105 +56,61 @@ export default {
       var map = new mapboxgl.Map({
         container: "map", // container id
         style: "mapbox://styles/mapbox/streets-v11", // stylesheet location
-        center: [-95.7129, 37.0902], // starting position [lng, lat]
-        zoom: 2.5, // starting zoom
+        center: [-95.7129, 39.0902], // starting position [lng, lat]
+        zoom: 3, // starting zoom
       });
-      // this.events.forEach(event => {
-      //   var popup = new mapboxgl.Popup({ offset: 25 }).setText(event.location);
-      // });
-
-      // Add geolocate control to the map.
       map.addControl(
         new mapboxgl.GeolocateControl({
           positionOptions: {
             enableHighAccuracy: true,
           },
+          fitBoundsOptions: {
+            maxZoom: 9.5,
+          },
           trackUserLocation: true,
         })
       );
+      var mapboxClient = mapboxSdk({ accessToken: mapboxgl.accessToken });
+      this.events.forEach(event => {
+        mapboxClient.geocoding
+          .forwardGeocode({
+            query: event.location,
+            autocomplete: false,
+            limit: 1,
+          })
+          .send()
+          .then(function(response) {
+            if (response && response.body && response.body.features && response.body.features.length) {
+              var feature = response.body.features[0];
+              var popup = new mapboxgl.Popup({ offset: 25, closeButton: false })
+                .setText(
+                  // [
+                  // " What: " + event.title,
+                  // " Where: " + event.location,
+                  // " When: " + event.date,
+                  // " " + event.time,
+                  // "<a href='/api/events/event.id'>Hello World!</h1>",
+                  // ]
+                  "heyo"
+                )
+                .setHTML('<a href="`/events/${event.id}`">{{event.title}}</a>');
+              // ^^ ALREADY TRIED WITH JUST "/events" AND IT WORKS ^^
+              new mapboxgl.Marker()
+                .setLngLat(feature.center)
+                .setPopup(popup)
+                .addTo(map);
+              // .setHTML('<a href="/api/events/">Events!</h1>');
+            }
+          });
+      });
     },
-    showEvents: function() {
+    getEvents: function() {
       axios.get("/api/events/").then(response => {
         console.log("Get events: ", response);
         this.events = response.data;
         this.setupMap();
       });
     },
-    // setupMap: function() {
-    //   var mapboxgl = require("mapbox-gl/dist/mapbox-gl.js");
-    //   mapboxgl.accessToken =
-    //     "pk.eyJ1IjoiZGFuY2xhaXIiLCJhIjoiY2thMzg5c3B3MGxycjNtcXdmYnI4OTU2YyJ9.RGBfD1rU5v1MFBYgcSEaiw";
-    //   var mapboxClient = mapboxSdk({ accessToken: mapboxgl.accessToken });
-    //   mapboxClient.geocoding
-    //     .forwardGeocode({
-    //       query: this.event.location,
-    //       autocomplete: false,
-    //       limit: 1,
-    //     })
-    //     .send()
-    //     .then(function(response) {
-    //       if (response && response.body && response.body.features && response.body.features.length) {
-    //         var feature = response.body.features[0];
-    //         var map = new mapboxgl.Map({
-    //           container: "map",
-    //           style: "mapbox://styles/mapbox/streets-v11",
-    //           center: feature.center,
-    //           zoom: 12,
-    //         });
-    //         new mapboxgl.Marker().setLngLat(feature.center).addTo(map);
-    //       }
-    //     });
-    // },
-    // showEvent: function() {
-    //   axios.get("/api/events/" + this.$route.params.id).then(response => {
-    //     console.log("Get one event: ", response);
-    //     this.event = response.data;
-    //     this.setupMap();
-    //   });
-    // },
-    // showComments: function() {
-    //   axios.get("/api/comments").then(response => {
-    //     console.log("Get one comment: ", response);
-    //     this.comments = response.data;
-    //   });
-    // },
-    // createEventUser: function() {
-    //   var params = {
-    //     event_id: this.event.id,
-    //   };
-    //   axios
-    //     .post("/api/event_users", params)
-    //     .then(response => {
-    //       location.reload();
-    //       // this.$router.push("/events/" + this.$route.params.id);
-    //       // push user's name into event_users?
-    //     })
-    //     .catch(error => {
-    //       console.log(error.response);
-    //       this.errors = error.response.data.errors;
-    //     });
-    // },
-    // destroyEventUser: function(eventuser) {
-    //   axios.delete("/api/event_users/0?event_id=" + this.$route.params.id).then(response => {
-    //     // this.$router.push("/events/" + this.$route.params.id);
-    //     location.reload();
-    //   });
-    // },
-    // createComment: function() {
-    //   var params = {
-    //     event_id: this.event.id,
-    //     text: this.newCommentText,
-    //   };
-    //   axios
-    //     .post("/api/comments", params)
-    //     .then(response => {
-    //       location.reload();
-    //     })
-    //     .catch(error => {
-    //       console.log(error.response);
-    //       this.errors = error.response.data.errors;
-    //     });
-    // },
   },
 };
 </script>
