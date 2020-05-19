@@ -49,38 +49,34 @@
         </div>
       </div>
       <br />
-      <!-- <h4>Cars at this event:</h4>
-      <div v-for="vehicle in vehicles">
-        <ul>
-          <li>{{ vehicle.make }}</li>
-        </ul>
-      </div> -->
-      <h4>Attendees:</h4>
+
+      <h4>Attendees / Cars:</h4>
       <div v-for="user in event.users">
         <ul>
-          <li>{{ user.first_name }} {{ user.last_name }}</li>
+          <li>
+            <b>{{ user.first_name }} {{ user.last_name }}</b>
+          </li>
+          <div v-for="vehicle in user.vehicles">
+            <ul>
+              <p>{{ user.first_name }}'s {{ vehicle.make.manufacturer }} {{ vehicle.vehicle_model.name }}</p>
+              <img :src="`${vehicle.image}`" width="40%" />
+            </ul>
+          </div>
         </ul>
-        <!-- <div v-for="vehicle in user.vehicles">
-          <ul>
-            <li>{{ vehicle.make }}</li>
-          </ul> -->
-        <!-- <div v-for="vehicle in user.vehicles">
-          <h6>Car:</h6>
-          <h5>{{ user.vehicle.make }}</h5> -->
-        <!-- </div> -->
       </div>
 
       <section>
-        <button class="button icon solid fa-thumbs-up" v-on:click="createEventUser()">Attend Event</button>
+        <button class="primary button icon solid fa-thumbs-up" v-on:click="createEventUser()">Attend Event</button>
         <button class="button icon solid fa-thumbs-down" v-on:click="destroyEventUser(eventuser)">
           Don't Attend Event
         </button>
       </section>
+      <br />
       <section>
         <a v-bind:href="`/events/${event.id}/edit`" v-if="event.is_owner" class="button icon solid fa-edit">
           Edit event
         </a>
-
+        <br />
         <a href="/events" class="button icon solid fa-arrow-left">Back to all events</a>
       </section>
     </div>

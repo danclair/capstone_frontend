@@ -72,7 +72,6 @@ export default {
       newEventDate: "",
       newEventTime: "",
       newEventLocation: "",
-      // newEventImage: "",
       image: "",
       event: {},
       errors: [],
@@ -86,12 +85,12 @@ export default {
   methods: {
     updateEvent: function(event) {
       var formData = new FormData();
-      formData.append("title", this.newEventTitle);
-      formData.append("description", this.newEventDescription);
-      formData.append("date", this.newEventDate);
-      formData.append("time", this.newEventTime);
-      formData.append("location", this.newEventLocation);
-      formData.append("image", this.image);
+      formData.set("title", this.newEventTitle);
+      formData.set("description", this.newEventDescription);
+      formData.set("date", this.newEventDate);
+      formData.set("time", this.newEventTime);
+      formData.set("location", this.newEventLocation);
+      formData.set("image", this.image);
       // var params = {
       //   title: event.title,
       //   description: event.description,

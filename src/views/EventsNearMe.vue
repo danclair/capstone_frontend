@@ -82,24 +82,14 @@ export default {
           .then(function(response) {
             if (response && response.body && response.body.features && response.body.features.length) {
               var feature = response.body.features[0];
-              var popup = new mapboxgl.Popup({ offset: 25, closeButton: false })
-                .setText(
-                  // [
-                  // " What: " + event.title,
-                  // " Where: " + event.location,
-                  // " When: " + event.date,
-                  // " " + event.time,
-                  // "<a href='/api/events/event.id'>Hello World!</h1>",
-                  // ]
-                  "heyo"
-                )
-                .setHTML('<a href="`/events/${event.id}`">{{event.title}}</a>');
+              var popup = new mapboxgl.Popup({ offset: 25, closeButton: false }).setHTML(
+                `<h6 style="color:black;">${event.title}</h6><p style="color:black;">${event.date} ${event.time}</p><a href="/events/${event.id}">Go to event page</a>`
+              );
               // ^^ ALREADY TRIED WITH JUST "/events" AND IT WORKS ^^
               new mapboxgl.Marker()
                 .setLngLat(feature.center)
                 .setPopup(popup)
                 .addTo(map);
-              // .setHTML('<a href="/api/events/">Events!</h1>');
             }
           });
       });
