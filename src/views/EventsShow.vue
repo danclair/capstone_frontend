@@ -2,7 +2,7 @@
   <section class="wrapper style1">
     <div class="inner">
       <div>
-        <h1>Event Info</h1>
+        <h1><u>Event Info</u></h1>
       </div>
       <h2>{{ event.title }}</h2>
       <img :src="event.image" class="responsive" alt="event.title" />
@@ -28,7 +28,7 @@
             <b>{{ comment.first_name }} {{ comment.last_name }}:</b>
             {{ comment.text }}
             <br />
-            <small>(at {{ comment.posted }})</small>
+            <small>(on {{ comment.posted }})</small>
           </li>
         </ul>
       </div>
@@ -54,7 +54,9 @@
       <div v-for="user in event.users">
         <ul>
           <li>
-            <b>{{ user.first_name }} {{ user.last_name }}</b>
+            <b>
+              <u>{{ user.first_name }} {{ user.last_name }}</u>
+            </b>
           </li>
           <div v-for="vehicle in user.vehicles">
             <ul>
@@ -146,6 +148,13 @@ export default {
               zoom: 12,
             });
             new mapboxgl.Marker().setLngLat(feature.center).addTo(map);
+            map.addControl(
+              new MapboxDirections({
+                accessToken: mapboxgl.accessToken,
+                // placeholderDestination: "200 S Columbus Drive, Chicago",
+              }),
+              "top-left"
+            );
           }
         });
     },

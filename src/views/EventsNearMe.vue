@@ -59,6 +59,12 @@ export default {
         center: [-95.7129, 39.0902], // starting position [lng, lat]
         zoom: 3, // starting zoom
       });
+      // map.addControl(
+      //   new MapboxDirections({
+      //     accessToken: mapboxgl.accessToken,
+      //   }),
+      //   "top-left"
+      // );
       map.addControl(
         new mapboxgl.GeolocateControl({
           positionOptions: {
@@ -85,7 +91,6 @@ export default {
               var popup = new mapboxgl.Popup({ offset: 25, closeButton: false }).setHTML(
                 `<h6 style="color:black;">${event.title}</h6><p style="color:black;">${event.date} ${event.time}</p><a href="/events/${event.id}">Go to event page</a>`
               );
-              // ^^ ALREADY TRIED WITH JUST "/events" AND IT WORKS ^^
               new mapboxgl.Marker()
                 .setLngLat(feature.center)
                 .setPopup(popup)

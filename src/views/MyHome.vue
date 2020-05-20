@@ -4,7 +4,7 @@
       <header class="major">
         <h2>{{ vehicles[0].user }}'s Home Base</h2>
         <br />
-        <a href="/events" class="large button">Go to All Events</a>
+        <a href="/events" class="large button">All Events</a>
         <a href="/eventsnearme" class="large button">Events Near Me</a>
       </header>
       <ul class="features">
@@ -36,41 +36,6 @@
             <br />
           </div>
         </li>
-        <!-- <li class="icon solid fa-laptop">
-          <h3>Ac Augue Eget</h3>
-          <p>
-            Augue consectetur sed interdum imperdiet et ipsum. Mauris lorem tincidunt nullam amet leo Aenean ligula
-            consequat consequat.
-          </p>
-        </li>
-        <li class="icon solid fa-code">
-          <h3>Mus Scelerisque</h3>
-          <p>
-            Augue consectetur sed interdum imperdiet et ipsum. Mauris lorem tincidunt nullam amet leo Aenean ligula
-            consequat consequat.
-          </p>
-        </li>
-        <li class="icon solid fa-headphones-alt">
-          <h3>Mauris Imperdiet</h3>
-          <p>
-            Augue consectetur sed interdum imperdiet et ipsum. Mauris lorem tincidunt nullam amet leo Aenean ligula
-            consequat consequat.
-          </p>
-        </li>
-        <li class="icon fa-heart">
-          <h3>Aenean Primis</h3>
-          <p>
-            Augue consectetur sed interdum imperdiet et ipsum. Mauris lorem tincidunt nullam amet leo Aenean ligula
-            consequat consequat.
-          </p>
-        </li>
-        <li class="icon fa-flag">
-          <h3>Tortor Ut</h3>
-          <p>
-            Augue consectetur sed interdum imperdiet et ipsum. Mauris lorem tincidunt nullam amet leo Aenean ligula
-            consequat consequat.
-          </p>
-        </li> -->
       </ul>
     </div>
   </section>

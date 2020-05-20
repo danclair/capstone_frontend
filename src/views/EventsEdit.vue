@@ -83,6 +83,11 @@ export default {
     });
   },
   methods: {
+    setFile: function(event) {
+      if (event.target.files.length > 0) {
+        this.image = event.target.files[0];
+      }
+    },
     updateEvent: function(event) {
       var formData = new FormData();
       formData.set("title", this.newEventTitle);
