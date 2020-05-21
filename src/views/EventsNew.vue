@@ -34,6 +34,7 @@
         <br />
         <input type="text" v-model="newEventLocation" placeholder="Location" />
         <br />
+        Image:
         <input type="file" v-on:change="setFile($event)" ref="fileInput" />
         <br />
         <ul class="actions">

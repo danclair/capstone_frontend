@@ -4,7 +4,7 @@
     <br />
     <br />
     <div>
-      <h1>All Upcoming Events</h1>
+      <h1><u>All Upcoming Events</u></h1>
     </div>
     <!-- Two -->
     <section id="two" class="wrapper alt style1">
@@ -15,9 +15,15 @@
             {{ event.title }}
           </h2>
           <p>
-            {{ event.description }}
+            <b>
+              <u>{{ event.location }}</u>
+            </b>
             <br />
-            {{ event.date }} {{ event.time }}
+            <i>
+              <b>{{ event.date }} {{ event.time }}</b>
+            </i>
+            <br />
+            {{ event.description }}
           </p>
           <div>
             <a :href="`/events/${event.id}`" class="button small">Show event</a>

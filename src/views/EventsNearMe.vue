@@ -7,15 +7,13 @@
 
       <br />
       <div id="map"></div>
+      <br />
+      <a href="/events" class="large button">All Events</a>
     </div>
   </section>
 </template>
 
 <style>
-.responsive {
-  width: 100%;
-  height: auto;
-}
 body {
   margin: 0;
   padding: 0;
@@ -59,12 +57,6 @@ export default {
         center: [-95.7129, 39.0902], // starting position [lng, lat]
         zoom: 3, // starting zoom
       });
-      // map.addControl(
-      //   new MapboxDirections({
-      //     accessToken: mapboxgl.accessToken,
-      //   }),
-      //   "top-left"
-      // );
       map.addControl(
         new mapboxgl.GeolocateControl({
           positionOptions: {
@@ -89,7 +81,7 @@ export default {
             if (response && response.body && response.body.features && response.body.features.length) {
               var feature = response.body.features[0];
               var popup = new mapboxgl.Popup({ offset: 25, closeButton: false }).setHTML(
-                `<h6 style="color:black;">${event.title}</h6><p style="color:black;">${event.date} ${event.time}</p><a href="/events/${event.id}">Go to event page</a>`
+                `<b><p style="color:black;">${event.title}</p></b><p style="color:black;">${event.location}</p><p style="color:black;">${event.date} ${event.time}</p><a href="/events/${event.id}">Go to event page</a>`
               );
               new mapboxgl.Marker()
                 .setLngLat(feature.center)

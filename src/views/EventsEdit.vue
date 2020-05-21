@@ -7,18 +7,10 @@
           <li v-for="error in errors">{{ error }}</li>
         </ul>
         Title:
-        <input type="text" name="demo-name" id="demo-name" v-model="newEventTitle" :placeholder="`${event.title}`" />
+        <input type="text" name="demo-name" id="demo-name" v-model="event.title" />
         <br />
         Description:
-        <textarea
-          type="text"
-          name="demo-message"
-          id="demo-message"
-          rows="3"
-          v-model="newEventDescription"
-          :placeholder="`${event.description}`"
-          >{{ event.description }}</textarea
-        >
+        <textarea type="text" name="demo-message" id="demo-message" rows="3" v-model="event.description"></textarea>
         <br />
         <!-- <input type="text" v-model="event.date" /> -->
         <div class="row gtr-uniform">
@@ -27,7 +19,7 @@
             <date-picker
               name="demo-date"
               id="demo-date"
-              v-model="newEventDate"
+              v-model="event.date"
               valueType="format"
               :placeholder="`${event.date}`"
             ></date-picker>
@@ -35,19 +27,19 @@
           <!-- <input type="text" v-model="event.time" /> -->
           <div class="col-6 col-12-xsmall">
             Time:
-            <date-picker v-model="newEventTime" type="time" :placeholder="`${event.time}`"></date-picker>
+            <date-picker v-model="event.time" type="time" :placeholder="`${event.time}`"></date-picker>
           </div>
         </div>
         <br />
         Location:
-        <input type="text" v-model="newEventLocation" :placeholder="`${event.location}`" />
+        <input type="text" v-model="event.location" />
         <br />
         <p>
           Current Image:
           <img :src="event.image" width="300" alt="event.title" />
         </p>
         Choose New Image:
-        <input type="file" v-on:change="setFile($event)" ref="fileInput" :placeholder="`${event.image}`" />
+        <input type="file" v-on:change="setFile($event)" ref="fileInput" />
         <br />
         <input type="submit" value="Update Event" class="button primary" />
       </form>
@@ -67,11 +59,6 @@ export default {
   components: { DatePicker },
   data: function() {
     return {
-      newEventTitle: "",
-      newEventDescription: "",
-      newEventDate: "",
-      newEventTime: "",
-      newEventLocation: "",
       image: "",
       event: {},
       errors: [],
@@ -90,12 +77,12 @@ export default {
     },
     updateEvent: function(event) {
       var formData = new FormData();
-      formData.set("title", this.newEventTitle);
-      formData.set("description", this.newEventDescription);
-      formData.set("date", this.newEventDate);
-      formData.set("time", this.newEventTime);
-      formData.set("location", this.newEventLocation);
-      formData.set("image", this.image);
+      formData.append("title", event.title);
+      formData.append("description", event.description);
+      formData.append("date", event.date);
+      formData.append("time", event.time);
+      formData.append("location", event.location);
+      formData.append("image", this.image);
       // var params = {
       //   title: event.title,
       //   description: event.description,

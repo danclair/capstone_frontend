@@ -28,7 +28,7 @@
             <b>{{ comment.first_name }} {{ comment.last_name }}:</b>
             {{ comment.text }}
             <br />
-            <small>(on {{ comment.posted }})</small>
+            <!-- <small>(on {{ comment.posted }})</small> -->
           </li>
         </ul>
       </div>
@@ -137,7 +137,7 @@ export default {
           limit: 1,
         })
         .send()
-        .then(function(response) {
+        .then(response => {
           if (response && response.body && response.body.features && response.body.features.length) {
             var feature = response.body.features[0];
 
@@ -147,14 +147,25 @@ export default {
               center: feature.center,
               zoom: 12,
             });
-            new mapboxgl.Marker().setLngLat(feature.center).addTo(map);
             map.addControl(
-              new MapboxDirections({
-                accessToken: mapboxgl.accessToken,
-                // placeholderDestination: "200 S Columbus Drive, Chicago",
-              }),
-              "top-left"
+              new mapboxgl.GeolocateControl({
+                positionOptions: {
+                  enableHighAccuracy: true,
+                },
+                fitBoundsOptions: {
+                  maxZoom: 9.5,
+                },
+                trackUserLocation: true,
+              })
             );
+            new mapboxgl.Marker().setLngLat(feature.center).addTo(map);
+            var directions = new MapboxDirections({
+              accessToken: mapboxgl.accessToken,
+              // placeholderDestination: "200 S Columbus Drive, Chicago",
+            });
+            map.addControl(directions, "top-left");
+
+            directions.setDestination(this.event.location);
           }
         });
     },

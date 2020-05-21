@@ -9,13 +9,13 @@
             <a href="#menu" class="menuToggle"><span>Menu</span></a>
             <div id="menu" class="wrapper style4">
               <ul>
-                <li><a href="/home">Home Base</a></li>
-                <li><a href="/events">Events</a></li>
-                <li v-if="jwt"><a href="/events/new">New Event</a></li>
-                <li v-if="jwt"><a href="/eventsnearme">Events Near Me</a></li>
-                <li v-if="!jwt"><a href="/signup">Sign Up</a></li>
-                <li v-if="!jwt"><a href="/login">Log In</a></li>
-                <li v-if="jwt"><a href="/logout">Logout</a></li>
+                <li><a href="/home" class="icon solid fa-home"> Home Base</a></li>
+                <li><a href="/events" class="icon solid fa-calendar"> Events</a></li>
+                <li v-if="jwt"><a href="/events/new" class="icon fa-calendar-plus"> New Event</a></li>
+                <li v-if="jwt"><a href="/eventsnearme" class="icon fa-map"> Events Near Me</a></li>
+                <li v-if="!jwt"><a href="/signup" class="icon solid fa-user-plus"> Sign Up</a></li>
+                <li v-if="!jwt"><a href="/login" class="icon solid fa-arrow-right"> Log In</a></li>
+                <li v-if="jwt"><a href="/logout" class="icon solid fa-arrow-left" aria-hidden="true"> Logout</a></li>
               </ul>
             </div>
           </li>
@@ -56,7 +56,6 @@
 #menu {
   /* background-color: #2e3842; */
   backdrop-filter: drop-shadow(100px);
-
 }
 .actions {
   margin: auto;
